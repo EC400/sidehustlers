@@ -1,0 +1,25 @@
+# Builds/Deps
+node_modules/
+functions/node_modules/
+.next/
+dist/
+out/
+.vercel/
+
+# Firebase/Emulator
+.firebase/
+firebase-debug.log
+firestore-debug.log
+ui-debug.log
+.emulator-cache/
+functions/lib/
+functions/dist/
+functions/.runtimeconfig.json
+
+# Env/IDE
+.env
+.env.local
+.env.*.local
+.vscode/
+.DS_Store
+Thumbs.db

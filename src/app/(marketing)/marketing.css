@@ -1,0 +1,563 @@
+/* app/(marketing)/marketing.css */
+/* Spezifische Styles für die SideHustlers Marketing Page mit angepasstem Farbschema */
+
+@import "tailwindcss";
+
+/* Custom Animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  33% {
+    transform: translateY(-10px) rotate(1deg);
+  }
+  66% {
+    transform: translateY(5px) rotate(-1deg);
+  }
+}
+
+@keyframes float-delayed {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  33% {
+    transform: translateY(5px) rotate(-1deg);
+  }
+  66% {
+    transform: translateY(-10px) rotate(1deg);
+  }
+}
+
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 0.2;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.3;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in-up {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Custom Utilities mit SideHustlers Farbschema */
+@utility animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@utility animate-float-delayed {
+  animation: float-delayed 6s ease-in-out infinite;
+  animation-delay: 2s;
+}
+
+@utility animate-pulse-slow {
+  animation: pulse-slow 4s ease-in-out infinite;
+}
+
+@utility animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 8s ease infinite;
+}
+
+@utility animate-slide-in-right {
+  animation: slide-in-right 0.6s ease-out;
+}
+
+@utility animate-slide-in-up {
+  animation: slide-in-up 0.6s ease-out;
+}
+
+/* Glassmorphism Effects */
+@utility glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+@utility glass-dark {
+  background: rgba(14, 42, 109, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Text Gradient Utilities mit SideHustlers Farben */
+@utility text-gradient-primary {
+  background: linear-gradient(135deg, #0E2A6D 0%, #1A4DB3 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+@utility text-gradient-accent {
+  background: linear-gradient(135deg, #1A4DB3 0%, #0EA5E9 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+@utility text-gradient-blue {
+  background: linear-gradient(135deg, #0E2A6D 0%, #0EA5E9 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Hover Effects */
+@utility hover-lift {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@variant hover {
+  .hover-lift {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  }
+}
+
+@utility hover-scale {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@variant hover {
+  .hover-scale {
+    transform: scale(1.05);
+  }
+}
+
+/* Card Shine Effect */
+@utility card-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+@utility card-shine::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.1) 50%,
+    transparent 70%
+  );
+  transform: rotate(45deg) translate(-100%, -100%);
+  transition: transform 0.6s;
+}
+
+@variant hover {
+  .card-shine::before {
+    transform: rotate(45deg) translate(100%, 100%);
+  }
+}
+
+/* Smooth Scroll Sections */
+@utility section-fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@utility section-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Navigation Blur Effect mit SideHustlers Farben */
+@utility nav-blur {
+  background: rgba(248, 250, 252, 0.8);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+}
+
+/* Button Glow Effect */
+@utility btn-glow {
+  position: relative;
+  overflow: hidden;
+}
+
+@utility btn-glow::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+@variant hover {
+  .btn-glow::after {
+    width: 300px;
+    height: 300px;
+  }
+}
+
+/* Number Counter Animation */
+@keyframes count-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@utility animate-count {
+  animation: count-up 0.8s ease-out;
+}
+
+/* Feature Card Gradient Border mit SideHustlers Farben */
+@utility gradient-border {
+  position: relative;
+  background: white;
+  border-radius: 1rem;
+}
+
+@utility gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 1rem;
+  padding: 2px;
+  background: linear-gradient(135deg, #0E2A6D, #1A4DB3, #0EA5E9);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+@variant hover {
+  .gradient-border::before {
+    opacity: 1;
+  }
+}
+
+/* Responsive Typography Scale */
+@utility heading-responsive {
+  font-size: clamp(2rem, 5vw, 3.75rem);
+  line-height: 1.1;
+}
+
+@utility subheading-responsive {
+  font-size: clamp(1.25rem, 3vw, 1.5rem);
+  line-height: 1.4;
+}
+
+/* Custom Scrollbar mit SideHustlers Farben */
+@utility custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: theme(colors.slate.400) theme(colors.slate.100);
+}
+
+@utility custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+@utility custom-scrollbar::-webkit-scrollbar-track {
+  background: theme(colors.slate.100);
+  border-radius: 4px;
+}
+
+@utility custom-scrollbar::-webkit-scrollbar-thumb {
+  background: theme(colors.slate.400);
+  border-radius: 4px;
+}
+
+@utility custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: theme(colors.slate.500);
+}
+
+/* Loading Skeleton */
+@keyframes skeleton-loading {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@utility skeleton {
+  background: linear-gradient(
+    90deg,
+    theme(colors.slate.200) 25%,
+    theme(colors.slate.100) 50%,
+    theme(colors.slate.200) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s ease-in-out infinite;
+}
+
+/* Parallax Effect Helper */
+@utility parallax-container {
+  position: relative;
+  overflow: hidden;
+  perspective: 1000px;
+}
+
+@utility parallax-element {
+  transform-style: preserve-3d;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Mobile-First Responsive Utilities */
+@media (max-width: 640px) {
+  .mobile-menu-slide {
+    animation: slide-in-right 0.3s ease-out;
+  }
+  
+  .hero-title-mobile {
+    font-size: 2.5rem;
+  }
+  
+  /* Native Mobile Feel */
+  * {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    touch-action: manipulation;
+  }
+  
+  /* Smooth iOS-like scrolling */
+  body {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: none;
+  }
+  
+  /* Native-like button press */
+  button, a {
+    -webkit-user-select: none;
+    user-select: none;
+  }
+  
+  button:active, a:active {
+    transform: scale(0.98);
+    opacity: 0.9;
+  }
+  
+  /* Mobile Card Styles */
+  .card {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    border-radius: 12px;
+  }
+  
+  /* Mobile Navigation Height */
+  nav {
+    min-height: 56px;
+  }
+  
+  /* Mobile Typography Scale */
+  h1 { 
+    font-size: clamp(1.875rem, 8vw, 2.5rem);
+    letter-spacing: -0.02em;
+  }
+  
+  h2 {
+    font-size: clamp(1.5rem, 6vw, 2rem);
+    letter-spacing: -0.01em;
+  }
+  
+  p {
+    font-size: 16px; /* Prevent zoom on iOS */
+    line-height: 1.6;
+  }
+  
+  /* Mobile Spacing */
+  section {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+  
+  /* Mobile-optimized Touch Targets */
+  button, a.btn, .clickable {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Bottom Safe Area for iOS */
+  footer {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  
+  /* Mobile Menu Overlay */
+  .mobile-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(248, 250, 252, 0.98);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    z-index: 999;
+  }
+  
+  /* iOS-style List Items */
+  .mobile-menu a {
+    display: block;
+    padding: 16px 20px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    transition: background-color 0.2s;
+  }
+  
+  .mobile-menu a:active {
+    background-color: rgba(0, 0, 0, 0.03);
+  }
+}
+
+/* Logo Spacing Fix */
+.nav-logo {
+  flex-shrink: 0;
+  margin-right: 2rem;
+}
+
+@media (max-width: 1024px) {
+  .nav-logo {
+    margin-right: 1rem;
+  }
+}
+
+/* SideHustlers Brand Colors */
+:root {
+  --sidehustlers-primary: #0E2A6D;
+  --sidehustlers-secondary: #1A4DB3;
+  --sidehustlers-accent: #0EA5E9;
+  --sidehustlers-background: #F8FAFC;
+  --sidehustlers-text: #0B1220;
+}
+
+/* Custom brand gradient backgrounds */
+.bg-brand-gradient {
+  background: linear-gradient(135deg, var(--sidehustlers-primary) 0%, var(--sidehustlers-secondary) 50%, var(--sidehustlers-accent) 100%);
+}
+
+.bg-brand-gradient-soft {
+  background: linear-gradient(135deg, rgba(14, 42, 109, 0.1) 0%, rgba(26, 77, 179, 0.1) 50%, rgba(14, 165, 233, 0.1) 100%);
+}
+
+/* Service Category Hover Effects */
+.service-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.service-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 25px 50px -12px rgba(14, 42, 109, 0.15);
+}
+
+/* Pricing Card Effects */
+.pricing-card {
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.pricing-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s;
+}
+
+.pricing-card:hover::before {
+  left: 100%;
+}
+
+/* Feature Cards with Brand Colors */
+.feature-card {
+  border: 1px solid rgba(14, 42, 109, 0.1);
+  transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+  border-color: var(--sidehustlers-accent);
+  box-shadow: 0 10px 40px rgba(14, 42, 109, 0.1);
+}
+
+/* CTA Section Improvements */
+.cta-section {
+  background: linear-gradient(135deg, var(--sidehustlers-primary) 0%, var(--sidehustlers-secondary) 100%);
+}
+
+/* Trust Indicator Styling */
+.trust-badge {
+  background: rgba(14, 165, 233, 0.1);
+  border: 1px solid rgba(14, 165, 233, 0.2);
+}
+
+/* Enhanced mobile responsiveness */
+@media (max-width: 768px) {
+  .hero-section {
+    padding-top: 6rem;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+  
+  .service-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .step-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .feature-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  
+  .pricing-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}

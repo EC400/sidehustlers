@@ -1,0 +1,174 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        * {
+          box-sizing: border-box;
+          -webkit-tap-highlight-color: transparent;
+        }
+        
+        html {
+          scroll-behavior: smooth;
+          -webkit-text-size-adjust: 100%;
+        }
+        
+        body {
+          font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+          font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+          background: #F8FAFC;
+          min-height: 100vh;
+          margin: 0;
+          padding: 0;
+          overscroll-behavior: none;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+          color: #0B1220;
+        }
+        
+        .professional-card {
+          background: #FFFFFF;
+          border-radius: 16px;
+          box-shadow: 
+            0 1px 3px rgba(11, 18, 32, 0.04),
+            0 4px 12px rgba(11, 18, 32, 0.08);
+          border: 1px solid rgba(11, 18, 32, 0.06);
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .professional-card:hover {
+          transform: translateY(-2px);
+          box-shadow: 
+            0 4px 6px rgba(11, 18, 32, 0.07),
+            0 8px 25px rgba(11, 18, 32, 0.12);
+        }
+        
+        .primary-color { color: #0E2A6D; }
+        .secondary-color { color: #1A4DB3; }
+        .accent-color { color: #0EA5E9; }
+        .text-color { color: #0B1220; }
+        .text-muted { color: #64748B; }
+        
+        .btn-primary {
+          background: #0E2A6D;
+          color: white;
+          border: none;
+          transition: all 0.2s ease;
+        }
+        
+        .btn-primary:hover {
+          background: #1A4DB3;
+          transform: translateY(-1px);
+        }
+        
+        .btn-secondary {
+          background: #1A4DB3;
+          color: white;
+          border: none;
+          transition: all 0.2s ease;
+        }
+        
+        .btn-secondary:hover {
+          background: #0EA5E9;
+          transform: translateY(-1px);
+        }
+        
+        @utility btn-outline {
+            background: transparent;
+            color: #1A4DB3;
+            border: 1.5px solid #1A4DB3;
+            border-radius: 0.5rem;
+            transition: all 0.2s ease;
+          }
+          
+          @variant hover {
+            btn-outline {
+              background: #1A4DB3;
+              color: white;
+            }
+          }
+        
+        .status-pending { 
+          background: #FEF3C7; 
+          color: #92400E; 
+          border: 1px solid #F3E8A0;
+        }
+        
+        .status-accepted { 
+          background: #DBEAFE; 
+          color: #1E40AF; 
+          border: 1px solid #93C5FD;
+        }
+        
+        .status-progress { 
+          background: #D1FAE5; 
+          color: #065F46; 
+          border: 1px solid #A7F3D0;
+        }
+        
+        .status-completed { 
+          background: #DCFCE7; 
+          color: #166534; 
+          border: 1px solid #BBF7D0;
+        }
+        
+        .touch-action {
+          touch-action: manipulation;
+          user-select: none;
+          -webkit-user-select: none;
+        }
+        
+        .mobile-safe {
+          padding-top: env(safe-area-inset-top);
+          padding-bottom: env(safe-area-inset-bottom);
+          padding-left: env(safe-area-inset-left);
+          padding-right: env(safe-area-inset-right);
+        }
+        
+        .subtle-animation {
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .fade-in {
+          animation: fadeIn 0.6s ease-out forwards;
+        }
+        
+        .slide-up {
+          animation: slideUp 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+        
+        .stagger-1 { animation-delay: 0.1s; }
+        .stagger-2 { animation-delay: 0.2s; }
+        .stagger-3 { animation-delay: 0.3s; }
+        .stagger-4 { animation-delay: 0.4s; }
+        
+        .glass-effect {
+          background: rgba(255, 255, 255, 0.95);
+          backdrop-filter: blur(16px) saturate(180%);
+          -webkit-backdrop-filter: blur(16px) saturate(180%);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+          from { 
+            opacity: 0; 
+            transform: translateY(20px); 
+          }
+          to { 
+            opacity: 1; 
+            transform: translateY(0); 
+          }
+        }
+        
+        @media (max-width: 768px) {
+          .professional-card {
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(11, 18, 32, 0.06), 0 2px 8px rgba(11, 18, 32, 0.10);
+          }
+          
+          .professional-card:hover {
+            transform: none;
+          }
+        }

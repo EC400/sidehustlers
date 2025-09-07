@@ -1,67 +1,64 @@
-// src/app/page.tsx - VEREINFACHTE VERSION OHNE SERVER AUTH
+// src/app/page.tsx - Verbesserte Homepage mit korrektem Routing
 "use client";
 
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
-import { useAuth } from "../hooks/useAuth";
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { useAuth } from '@/src/hooks/useAuth';
 
-export default function Home() {
+export default function HomePage() {
   const router = useRouter();
-  const { authUser, loading } = useAuth();
+  const { user, loading, isProfileComplete } = useAuth();
 
   useEffect(() => {
-    console.log("🏠 Root page - Auth state:", { 
-      user: authUser?.email || null, 
-      loading,
-      timestamp: new Date().toLocaleTimeString()
+    if (loading) {
+      console.log('⏳ Auth loading...');
+      return;
+    }
+
+    if (!user) {
+      console.log('👤 No user found, redirecting to login');
+      router.replace('/login');
+      return;
+    }
+
+    console.log('🔄 User found, checking profile completion', {
+      uid: user.id,
+      accountType: user.role,
+      isComplete: isProfileComplete
     });
 
-    // Warten bis Auth initialisiert ist
-    if (loading) {
-      console.log("⏳ Still loading, waiting...");
+    // Profilvervollständigung prüfen
+    if (!isProfileComplete) {
+      console.log('📝 Profile incomplete, redirecting to complete-profile');
+      router.replace('/complete-profile');
       return;
     }
 
-    // Redirect basierend auf Auth-Status
-    if (!authUser) {
-      console.log("❌ No user found, redirecting to login");
-      router.replace("/login");
-      return;
-    }
-
-    // User ist eingeloggt - prüfe Profil
-    console.log("✅ User found, checking profile:", authUser.email);
+    // Dashboard-Routing basierend auf accountType
+    const dashboardPath = user.role === 'provider' 
+      ? '/dashboard/provider' 
+      : '/dashboard/customer';
     
-    // Temporär: Alle User zu customer dashboard
-    console.log("🚀 Redirecting to customer dashboard");
-    router.replace("/dashboard/customer");
-    
-  }, [authUser, loading, router]);
+    console.log(`🏠 Redirecting to dashboard: ${dashboardPath}`);
+    router.replace(dashboardPath);
+  }, [user, loading, isProfileComplete, router]);
 
-  // Loading state
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin w-8 h-8 border-3 border-blue-500 border-t-transparent rounded-full mx-auto mb-4"></div>
-          <p className="text-gray-600 font-medium">Lade Dashboard...</p>
-        </div>
-      </div>
-    );
-  }
-
-  // Fallback falls Redirect nicht funktioniert
+  // Loading-Anzeige
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 flex items-center justify-center">
+    <div className="min-h-screen flex items-center justify-center bg-[#F8FAFC]">
       <div className="text-center">
-        <div className="animate-spin w-8 h-8 border-3 border-blue-500 border-t-transparent rounded-full mx-auto mb-4"></div>
-        <p className="text-gray-600 font-medium">Leite weiter...</p>
-        <button 
-          onClick={() => router.push("/login")}
-          className="mt-4 text-blue-500 underline"
-        >
-          Manuell zur Anmeldung
-        </button>
+        <div className="w-16 h-16 bg-gradient-to-br from-[#0A1B3D] to-[#1E4A72] rounded-2xl flex items-center justify-center shadow-2xl mx-auto mb-6 p-3">
+          <img 
+            src="/logo.svg" 
+            alt="SideHustlers Logo" 
+            className="w-full h-full object-contain"
+          />
+        </div>
+        <div className="animate-spin w-8 h-8 border-4 border-[#0A1B3D] border-t-transparent rounded-full mx-auto mb-4"></div>
+        <h2 className="text-xl font-semibold text-[#0F172A] mb-2">SideHustlers</h2>
+        <p className="text-[#64748B]">
+          {loading ? 'Anmeldung wird überprüft...' : 'Weiterleitung...'}
+        </p>
       </div>
     </div>
   );

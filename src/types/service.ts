@@ -1,3 +1,4 @@
+// src/types
 import { ServiceData } from "@/src/lib/db";
 
 export interface Service extends ServiceData {
